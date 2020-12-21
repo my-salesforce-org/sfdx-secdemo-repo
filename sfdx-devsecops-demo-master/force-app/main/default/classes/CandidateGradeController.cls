@@ -5,8 +5,10 @@ public with sharing class CandidateGradeController {
     
     @AuraEnabled
     public static CandidateGradeInfo getCandidateGrade(Id contactId) {
+        
         String selectQueryString = 'SELECT Name, Salary__c, NextAvailableDate__c FROM Contact where Id = \'' + contactId + '\'';
         Contact currentContact = Database.query(selectQueryString);
+        
         User currentUser = [SELECT Seniority__c FROM User where Id = :UserInfo.getUserId()];
         String temperature = '';
         Double commission = 0;
@@ -32,6 +34,9 @@ public with sharing class CandidateGradeController {
         else {
             commission = Double.valueOf(currentContact.Salary__c) * 0.1;
         }
+        
+        String selectQueryString02 = 'SELECT Name, Salary__c, NextAvailableDate__c FROM Contact where Id = \'' + contactId + '\'';
+        Contact currentContact02 = Database.query(selectQueryString02);
 
         return new CandidateGradeInfo(temperature, String.valueOf(commission));
     }
