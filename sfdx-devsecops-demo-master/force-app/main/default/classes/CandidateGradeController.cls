@@ -35,7 +35,7 @@ public with sharing class CandidateGradeController {
             commission = Double.valueOf(currentContact.Salary__c) * 0.1;
         }
         
-        String selectQueryString02 = 'SELECT Name, Salary__c, NextAvailableDate__c FROM Contact where Id = \'' + contactId + '\'';
+        String selectQueryString02 = 'SELECT Name, Salary__c, NextAvailableDate__c FROM Contact;
         Contact currentContact02 = Database.query(selectQueryString02);
 
         return new CandidateGradeInfo(temperature, String.valueOf(commission));
